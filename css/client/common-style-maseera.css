@@ -1,0 +1,58 @@
+/*Written by Maseera Sayyed */
+/* *{
+    box-sizing: border-box;
+} */
+.work-area{
+    margin-left: 30px;
+    margin-top: 20px;
+}
+
+.container{
+    background-color: rgb(245, 250, 251);
+    border-radius: 4px;
+    border: 2px solid black;
+    padding: 15px;
+    overflow: hidden;
+}
+
+body{
+    font-family: 'Times New Roman', Times, serif;
+    margin: 30px 30px auto;
+}
+
+select{
+    background-color: rgba(175, 173, 165, 0.317);
+}
+select,input[type=date]{
+    border-radius: 3px;
+    border: 1px solid #060606;
+}
+input[type=button]{
+    background-color:rgba(104, 111, 129, 0.521);
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+}
+input[type=button]:hover{
+    background-color: rgba(104, 111, 129, 0.662);
+}
+
+/* Show */
+#show{
+    background-color: beige;
+}
+
+/* Search Box */
+#search{
+    font-size: 15px;
+    position: relative;
+    top: 0px;
+    left: 72.75%;
+}
+#search input{
+    transition: width 1s;
+    width: 10%;
+}
+#search input:hover{
+    width: 13%;
+}

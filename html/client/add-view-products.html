@@ -1,0 +1,138 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Army Inventory</title>
+    <link rel="stylesheet" href="../css/utils.css">
+    <link rel="stylesheet" href="../css/common-style-maseera.css">
+    <link rel="stylesheet" href="../css/style-add-view-products.css">
+    <script src="js/script-tab.js"></script>
+</head>
+
+<body>
+    <div class="header-container">
+        <div class="item">Administrator</div>
+        <div class="item">Army Inventory </div>
+        <div class="item">You are logged in as Super Admin <button id="logout" type="button">logout</button></div>
+    </div>
+    <div class="tabs">
+        <button type="button" onclick="nav('dashboard')">Dashboard</button>
+        <button type="button" onclick="nav('add-user')">Add User</button>
+        <button type="button" onclick="nav('add-new-category')">Add New Category</button>
+        <button type="button" onclick="nav('add-view-products')">Add/View Products</button>
+        <button type="button" onclick="nav('product-issued-to-br')">Products Issued To BR.</button>
+        <button type="button" onclick="nav('annual-stock-taking-bd')">Annual Stock Taking BD</button>
+        <button type="button" onclick="nav('issue-to-store')">Issued To Store</button>
+        <button type="button" onclick="nav('stores')">Stores</button>
+        <button type="button" onclick="nav('add-store-man')">Add Store Man</button>
+        <button type="button" onclick="nav('add-branch')">Add Branch</button>
+        <button type="button" onclick="nav('products')">Products</button>
+        <button type="button" onclick="nav('issued-return-product')">Issued/Return Products</button>
+        <button type="button" onclick="nav('return-history')">Return History</button>
+        <button type="button" onclick="nav('notification')">Notification</button>
+    </div>
+
+    <div class="work-area">
+
+        <div class="container">
+            <form action="" method="get">
+                <h1 style="float:left;">Product List</h1>
+                <div><input type="button" name="Add_New" id="add_new" value="Add New"></div>
+                <table style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Product Name:</th>
+                            <th>Category Name:</th>
+                            <th>Procured/Issued:</th>
+                            <th>Procured/Issued Category:</th>
+                            <th>Procured/Issued Type:</th>
+                            <th>Voucher Number:</th>
+                            <th>For Date:</th>
+                            <th>From Date:</th>
+                            <th>To Date:</th>
+                            <th>Action:</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <td><input type="text" name="Product_name" id="Product_name"></td>
+                        <td>
+                            <select name="Category_name" id="Category_name">
+                                <option value="None">--Select--</option>
+                                <option value="Elect">Elect</option>
+                                <option value="Tentage">Tentage</option>
+                                <option value="Furniture">Furniture</option>
+                                <option value="FFE">FFE</option>
+                            </select>
+                        </td>
+
+                        <td>
+                            <select name="Procured/Issued" id="Procured/Issued">
+                                <option value="None">--Select--</option>
+                                <option value="Procured">Procured</option>
+                                <option value="Issued">Issued</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="Procured/Issued Category" id="Procured/Issued Category">
+                                <option value="None">--Select--</option>
+                                <option value="Public">Public</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="Procured/Issued Type" id="Procured/Issued Type">
+                                <option value="None">--Select--</option>
+                                <option value="TTIEG">TTIEG</option>
+                                <option value="IT (Sty)">IT (Sty)</option>
+                                <option value="IT (Hardware)">IT (Hardware)</option>
+                                <option value="ACG">ACG</option>
+                                <option value="ATG">ATG</option>
+                                <option value="BEQD">BEQD</option>
+                            </select>
+                        </td>
+                        <td><input type="text" name="Voucher Number" id="Voucher Number"></td>
+                        <td>
+                            <select name="For Date" id="For Date">
+                                <option value="None">--Select--</option>
+                                <option value="CVR Date">CVR Date</option>
+                            </select>
+                        </td>
+                        <td><input type="date" name="from date" id="from date"></td>
+                        <td><input type="date" name="to date" id="to date"></td>
+                        <td><input type="button" name="Filter" id="Filter" value="Filter"></td>
+                    </tbody>
+                </table>
+            </form>
+            <p>
+                <span>Show <select name="Show" id="show">
+                        <option value="100">100</option>
+                        <option value="200">200</option>
+                        <option value="300">300</option>
+                    </select> enteries</span>
+                <span id="search">Search: <input type="text" name="Search" id=""></span>
+            </p>
+
+            <table class="product_list">
+                <tr>
+                    <th>PORODUCT NAME</th>
+                    <th>CATEGORY NAME</th>
+                    <th>PROCURED/ISSUED</th>
+                    <th>PROCURRED/ISSUED CATEGORY</th>
+                    <th>PROCURED/ISSUED TYPE</th>
+                    <th>QTY AUTH</th>
+                    <th>QTY HELD</th>
+                    <TH>QTY ISSUED</TH>
+                    <TH>QTY BAL</TH>
+                    <TH>SER QTY</TH>
+                    <TH>UN SV QTY</TH>
+                    <TH>ACTIONS</TH>
+                </tr>
+            </table>
+
+        </div>
+
+    </div>
+</body>
+
+</html>

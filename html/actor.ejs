@@ -1,0 +1,234 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIMS</title>
+    <link rel="stylesheet" href="../css/utils.css">
+    <script src="../js/lib/client/nav.js"></script>
+    <script src="../js/lib/client/logout.js"></script>
+    <style>
+    table{
+        padding: 5px;
+        border-collapse: collapse;
+        width: 100%;
+        overflow: auto;
+        text-align: left;
+        font-size: 20px;
+        font-size: medium;
+    }
+    tbody,td{
+        border: 1px solid rgb(31, 29, 29);
+        border-collapse: collapse;
+        padding: 5px;
+        margin: 0% auto;
+        text-align: center;
+    }
+    thead,th{
+        padding: 1px;
+        font-size: 17px;
+        border-collapse: collapse;
+    }
+    .input{
+        width: 100%;
+    }
+    </style>
+</head>
+<body>
+    <div class="header grid-container">
+        <div class="header grid-item">Administrator</div>
+        <div class="header grid-item">
+            <h2> AIMS </h2>
+        </div>
+        <div class="header grid-item">User: beta<button id="logout" type="button" onclick="logout()"><img src="../img/icon-logout.png" alt=""></button></div>
+    </div>
+    <div class="navbar">
+        <button type="button" onclick="nav('dashboard')" >Dashboard</button>
+        <button type="button" onclick="nav('actors')" >Actors</button>
+        <button type="button" onclick="nav('mysqlapi')" >MySql API</button>                
+    </div>
+    <div class="work-area" id="htmlPage">
+        <h2> Actors </h2><br>
+        <h3>SEARCH/ADD HERE</h3>
+    <div id="message"></div>
+    <table border="1" border-collapse="collapse" width100%>
+        <thead>
+            <tr>
+                <form>
+                    <!-- for live search onkeyup="searching()" in input -->
+                    <th><input type="search" name="actor_id" placeholder="Enter Actor ID" class="input" id="actor_id" ></th>  
+                    <th><input type="search" name="first_name" placeholder="Enter First name" class="input" id="first_name"></th>
+                    <th><input type="search" name="last_name" placeholder="Enter Last name" class="input" id="last_name"></th>
+                    <th ><span><input type="button" value="Add New" onclick="return addNew()"></span><span><input type="button" value="search" id="searchBtn" onclick="return searching()"></span></th>
+                </form>
+            </tr>
+            <tr>
+                <% for ( var i=0;i < thead.length;i++ ) { %>
+                    <th><b><%= thead[i].name %></b></th>
+                <% } %>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+            <% if(tbody.length>0){ %>
+                <% for ( var i=0;i < tbody.length; i++ ) { %>
+                    <tr id="tr">
+                        <% for ( var j=0;j < thead.length;j++ ) { %>
+                            <td><%= tbody[i][thead[j].name] %></td>
+                        <% } %>
+                    <td><span><a href="#" onclick="return deleting(this,<%= tbody[i].actor_id %>)">Delete</a></span>&nbsp;
+                        <span><a href="#" onclick="return edit_ajax(<%= tbody[i].actor_id %>)">Edit</a></span></td>  
+                    </tr>
+                <% } %>
+            <% }else{ %>
+                <h1>Data not found</h1>
+            <% } %>
+        </tbody>
+    <div id="message"></div>
+    </table>
+    </div>
+</body>
+</html>
+
+<script>   
+    function newValues(){                                    //Value array function
+        var elements = document.querySelectorAll(".input")
+        console.log(elements);
+        const array = [];
+        for (var i = 0; i<elements.length; i++ ){
+            array[i] = document.getElementById(elements[i].id).value
+        }
+        console.log ("values",array);
+        return array;
+    }
+//***************************************************SEARCHING*********************************************************
+    function showRow(html,req,rows){                         //Searching onreadystatechange function
+        if(req.readyState===4 && req.status===200){        
+            if(html.length>35){ 
+                document.getElementById("message").innerHTML="";
+                rows.innerHTML += html;
+                document.getElementsByTagName("input").value="";
+            }
+            else{
+                document.querySelectorAll("#tr").forEach(function(ele) {
+                ele.remove();
+            });
+            document.getElementById("message").innerHTML += "DATA NOT FOUND";
+            }
+        }
+        else{
+            console.log('error');
+        }
+    }
+    function searching(){                                          //searching function
+        document.getElementById("message").innerHTML="";
+        var req=new XMLHttpRequest();                   
+        let values = newValues();                            
+        var rows = document.getElementById("tbody");           //removing all the rows before searching
+        document.querySelectorAll("#tr").forEach(function(ele) {
+            ele.remove();
+        });
+        
+        let stmt = 'select * from actor where actor_id like "%'+values[0]+'%" and first_name like "%'+values[1]+'%" and last_name like"%'+values[2]+'%";';
+        req.open("POST","/searching",false);                   
+        req.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
+        req.send("stmt="+stmt);
+        const html = req.responseText;
+        req.onreadystatechange = showRow(html,req,rows);
+        return false;
+    }
+//****************************************************DELETE*****************************************************
+    function messageShowDelete(obj,html,req){                                 //Delete onreadystatechange function
+            if(req.readyState===4 && req.status===200){        
+                alert(html);
+                console.log(obj.parentElement.parentElement.parentElement);
+                obj.parentElement.parentElement.parentElement.remove();
+            }
+            else{
+                console.log('error');
+            }
+        }
+    function deleting(obj,actor_id){                                    //delete function
+        var req=new XMLHttpRequest(); 
+        let stmt =  'delete from actor where actor_id='+actor_id+';';
+        req.open("POST","/deleting",false);                                      //POST
+    
+        req.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
+        req.send("stmt="+stmt+"&actor_id="+actor_id);
+        const html = req.responseText;
+        req.onreadystatechange = messageShowDelete(obj,html,req);
+        return false;
+    }
+//*****************************************************ADD-NEW*******************************************************
+    function messageShowAddNew(html,req,page){                          //Add new onreadystatechange function
+        if(req.readyState===4 && req.status===200){        
+            alert(html);
+            let stmt="select * from actor limit 0,500";
+            let req2 = new XMLHttpRequest;
+            req2.open("POST","/newTable",false);
+            req2.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            req2.send("stmt="+stmt);
+            page.innerHTML=req2.responseText;
+        }
+        else{
+            console.log('error');
+        }
+    }
+    function addNew(){
+        var req=new XMLHttpRequest(); 
+        let values=newValues();
+        var table=document.getElementById("tbody");
+        let page=document.getElementById("htmlPage");
+        let stmt = 'insert into actor (actor_id,first_name,last_name) values("'+values[0]+'","'+values[1]+'","'+values[2]+'");';
+        req.open("POST","/addNew",false);                                        
+        req.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        req.send("stmt="+stmt+"&actor_id="+values[0]);
+        const html = req.responseText;
+        req.onreadystatechange = messageShowAddNew(html,req,page);
+        return false;
+    }
+//*******************************************************EDIT/UPDATE*****************************************************
+function func2(req,page){                                      //upddate button onreadystatechange function
+        if(req.readyState===4 && req.status===200){ 
+            document.getElementById("response").innerHTML=req.responseText;
+            setTimeout(()=>{
+                let stmt="select * from actor limit 0,500";
+                let req2 = new XMLHttpRequest;
+                req2.open("POST","/Edited",false);
+                req2.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+                req2.send("stmt="+stmt);
+                page.innerHTML=req2.responseText;
+            },2000) 
+        }
+        else{
+            console.log('func2 error');
+        }   
+    }   
+    function func(page,html,req){                              //Edit_ajax onreadystatechange function
+        if(req.readyState===4 && req.status===200){        
+            page.innerHTML=html;
+        }
+        else{
+            console.log('error');
+        }
+    }
+    function edit_ajax(actor_id){                                       //Edit_ajax function at search_ajax page
+        let stmt = "SELECT * FROM actor where actor_id="+actor_id+";";
+        let req = new XMLHttpRequest;
+        req.open("GET","/Edit?stmt="+stmt,false);
+        req.send();
+        let page=document.getElementById("htmlPage");
+        page.innerHTML="";
+        let html=req.responseText;
+        req.onreadystatechange = func(page,html,req);
+        document.getElementById("updateSubmit").addEventListener('click',()=> {    //Update button eventlistener
+            let values = newValues();
+            let stmt = 'update actor set first_name="'+values[1]+'" ,last_name="'+values[2]+'" where actor_id='+values[0]+';';
+            req.open("POST","/Edit",false);
+            req.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            req.send("stmt="+stmt);
+            req.onreadystatechange = func2(req,page);
+        });
+        return false;
+    }
+</script>

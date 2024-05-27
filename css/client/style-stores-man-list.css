@@ -1,0 +1,22 @@
+body{
+    padding-top:1%;
+}
+.div2{
+   padding:0.4px;
+    width: 100%;
+    background-color: greenyellow;
+   
+}
+.cilckme{
+    background-color: blue;
+    position:absolute;
+    right: 1%; 
+    color:white;
+}
+
+
+/* .div1{
+    border:1px solid black;
+    margin:2%;
+    padding:1%;
+} */

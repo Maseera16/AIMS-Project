@@ -1,0 +1,41 @@
+body{
+    padding-top:1%;
+}
+
+table,th,td{
+    border: 1px solid black;
+    border-collapse:collapse;
+    height: 1.5rem;
+    text-align: left;
+}
+h1{
+    margin: 30px auto;
+}
+select{
+    background-color: #DBDFEA;
+ }
+button{
+    background-color: #526D82;
+    color:white;
+}
+tr:nth-child(even) {
+      background-color: #DBDFEA;
+}
+thead{
+    background-color:#DBDFEA ;
+}
+th{
+    text-align: center;
+  }
+  td{
+    padding-left: 0.3%;
+  }
+.div1{
+    border: 2px solid black;
+    border-radius: 4px;
+    padding:15px;
+}
+.search{
+    position:relative;
+    left:75.5%;
+  }

@@ -1,0 +1,15 @@
+{
+  "name": "db-connector",
+  "version": "1.0.0",
+  "description": "database connection from nodejs to mysql server, docs are available at https://www.npmjs.com/package/mysql",
+  "main": "db-connector.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "nakultiwari99@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "@mysql/xdevapi": "file:mysql-connector-nodejs-8.0.32.tar.gz",
+    "mysql": "^2.18.1"
+  }
+}

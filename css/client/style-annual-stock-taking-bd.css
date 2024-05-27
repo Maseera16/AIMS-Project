@@ -1,0 +1,35 @@
+#action{
+    width: 31%;
+    border: none;
+    border-color: #3f5060;
+    border-radius: 3px;
+}
+
+/* Table Style */
+table{
+    padding: 5px;
+    border-collapse: collapse;
+    width: 100%;
+    overflow: auto;
+}
+tbody,td{
+    border: 1px solid rgb(31, 29, 29);
+    border-collapse: collapse;
+    padding: 5px;
+    margin: 0% auto;
+    text-align: left;
+}
+thead,th{
+    padding: 1px;
+    font-size: 17px;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.product_list table,.product_list th{
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: left;
+    background-color: #526d8268;
+    font-size: 16px;
+}

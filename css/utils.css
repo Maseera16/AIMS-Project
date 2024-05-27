@@ -1,0 +1,47 @@
+/* common stylesheet for all AIMS web pages */
+
+* {
+    /* default margin of whole webpage */
+    margin: 0% 0% 0% 0%;
+}
+
+.header.grid-container {
+    background-color: rgb(17, 17, 79);
+    color: white;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    justify-content:space-between;
+}
+
+.header.grid-item {
+    padding: 10px 10px 10px 10px;
+}
+
+#logout {
+    border-radius: 20px;
+    margin-left: 1em;
+    margin-top: -0.7em;
+    background-color: red;
+}
+
+#logout img{
+    width: 1em;
+    height: 1em;
+}
+
+.navbar button {
+    padding: 5px 10px 5px 10px;
+    margin: 10px 5px 10px 5px;
+    background-color: white;
+    color: rgb(17, 17, 79);
+    border-color: rgb(17, 17, 79);
+    border-radius: 20px;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.work-area{
+    padding-left: 1em;
+}
+
+

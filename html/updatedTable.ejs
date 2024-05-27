@@ -1,0 +1,53 @@
+<style>
+    .work-area{
+        margin: 0%;
+    }
+    .input{
+        width: 30%;
+    }
+</style>
+<div class="work-area" id="htmlPage">
+<body>
+    <div class="work-area" id="htmlPage">
+    <h2> Actors </h2><br>
+    <h2>SEARCH/ADD HERE</h2>
+    <div id="message"></div>
+    <table border="1" border-collapse="collapse" width100%>
+        <thead>
+            <tr>
+                <form>
+                    <!-- for live search onkeyup="searching()" in input -->
+                    <th><input type="search" name="actor_id" placeholder="Enter Actor ID" class="input" id="actor_id" ></th>  
+                    <th><input type="search" name="first_name" placeholder="Enter First name" class="input" id="first_name"></th>
+                    <th><input type="search" name="last_name" placeholder="Enter Last name" class="input" id="last_name"></th>
+                    <th ><span><input type="button" value="Add New" onclick="return addNew()"></span><span><input type="button" value="search" id="searchBtn" onclick="return searching()"></span></th>
+                </form>
+            </tr>
+            <tr>
+                <% for ( var i=0;i < thead.length;i++ ) { %>
+                    <th><b><%= thead[i].name %></b></th>
+                <% } %>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+            <% if(tbody.length>0){ %>
+                <% for ( var i=0;i < tbody.length; i++ ) { %>
+                    <tr id="tr">
+                        <% for ( var j=0;j < thead.length;j++ ) { %>
+                            <td><%= tbody[i][thead[j].name] %></td>
+                        <% } %>
+                    <td><span><a href="#" onclick="return deleting(this,<%= tbody[i].actor_id %>)">Delete</a></span>&nbsp;
+                        <span><a href="#" onclick="return edit_ajax(<%= tbody[i].actor_id %>)">Edit</a></span></td>  
+                    </tr>
+                <% } %>
+            <% }else{ %>
+                <h1>Data not found</h1>
+            <% } %>
+        </tbody>
+    <div id="message"></div>
+    </table>
+    </div>
+</body>
+</div>
+
